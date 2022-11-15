@@ -8,30 +8,34 @@ function getComputerChoice() {
         return "scissor"
     }
 }
+
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection==computerSelection){
+    if (playerSelection == computerSelection) {
         return 'tie';
-    }
-    else if (playerSelection=="rock"&& computerSelection=="scissor"){
-        winMessage(playerSelection,computerSelection);
+    } else if (playerSelection == "rock" && computerSelection == "scissor") {
         return 'win';
-    }else if (playerSelection=="scissor"&& computerSelection=="paper"){
-        winMessage(playerSelection,computerSelection);
+    } else if (playerSelection == "scissor" && computerSelection == "paper") {
         return 'win';
-    }else if(playerSelection=="paper"&&computerSelection=="rock"){
-        winMessage(playerSelection,computerSelection);
+    } else if (playerSelection == "paper" && computerSelection == "rock") {
         return 'win';
-    }else{
-        loseMessage(playerSelection,computerSelection);
+    } else {
         return 'lose';
     }
 }
-function winMessage(playerSelection,computerSelection){
-    console.log(`${playerSelection} wins against ${computerSelection}`)
+    
+function displayMessage(roundResult,playerSelection,computerSelection){
+    let displayDiv = document.querySelector("div#results");
+    if(roundResult=="tie"){
+        displayDiv.innerHTML="it was a tie!"
+    } 
+    else if(roundResult=="lose"){
+        displayDiv.innerHTML= `${playerSelection} loses to ${computerSelection}`
+    }else {
+        displayDiv.innerHTML=`${playerSelection} wins against ${computerSelection}`
+    }
 }
-function loseMessage(playerSelection,computerSelection){
-    console.log(`${playerSelection} loses against ${computerSelection}`)
-}
+
+
 
 
 let win = 0;
@@ -44,7 +48,9 @@ buttons.forEach(
         button.addEventListener('click', (e) => {
             let playerChoice = e.target.id;
             let computerChoice = getComputerChoice();
-            console.log(playRound(playerChoice, computerChoice))
+            let result = playRound(playerChoice,computerChoice);
+            displayMessage(result,playerChoice,computerChoice);
+
         })
     }
 )
