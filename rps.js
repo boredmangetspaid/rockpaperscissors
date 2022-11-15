@@ -9,28 +9,28 @@ function getComputerChoice() {
     }
 }
 function playRound(playerSelection, computerSelection) {
-
-    if (playerSelection == "rock" && computerSelection == "scissor") {
-        console.log("rock beats scissors");
+    if (playerSelection==computerSelection){
+        return 'tie';
+    }
+    else if (playerSelection=="rock"&& computerSelection=="scissor"){
+        winMessage(playerSelection,computerSelection);
         return 'win';
-    } else if (playerSelection == "rock" && computerSelection == "paper") {
-        console.log("rock loses to paper");
+    }else if (playerSelection=="scissor"&& computerSelection=="paper"){
+        winMessage(playerSelection,computerSelection);
+        return 'win';
+    }else if(playerSelection=="paper"&&computerSelection=="rock"){
+        winMessage(playerSelection,computerSelection);
+        return 'win';
+    }else{
+        loseMessage(playerSelection,computerSelection);
         return 'lose';
-    } else if (playerSelection == "scissor" && computerSelection == "paper") {
-        console.log('scissor beats paper');
-        return 'win';
-    } else if (playerSelection == "scissor" && computerSelection == "rock") {
-        console.log("scissor loses to rock");
-        return "lose";
-    } else if (playerSelection == "paper" && computerSelection == "rock") {
-        console.log("paper beats rock");
-        return "win";
-    } else if (playerSelection == "paper" && computerSelection == "scissor") {
-        console.log("paper loses to scissor")
-        return "lose";
-    } else {
-        return "tie"
-    };
+    }
+}
+function winMessage(playerSelection,computerSelection){
+    console.log(`${playerSelection} wins against ${computerSelection}`)
+}
+function loseMessage(playerSelection,computerSelection){
+    console.log(`${playerSelection} loses against ${computerSelection}`)
 }
 
 
