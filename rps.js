@@ -8,56 +8,43 @@ function getComputerChoice() {
         return "scissor"
     }
 }
-
 function playRound(playerSelection, computerSelection) {
 
     if (playerSelection == "rock" && computerSelection == "scissor") {
+        console.log("rock beats scissors");
         return 'win';
     } else if (playerSelection == "rock" && computerSelection == "paper") {
+        console.log("rock loses to paper");
         return 'lose';
     } else if (playerSelection == "scissor" && computerSelection == "paper") {
+        console.log('scissor beats paper');
         return 'win';
     } else if (playerSelection == "scissor" && computerSelection == "rock") {
+        console.log("scissor loses to rock");
         return "lose";
     } else if (playerSelection == "paper" && computerSelection == "rock") {
+        console.log("paper beats rock");
         return "win";
     } else if (playerSelection == "paper" && computerSelection == "scissor") {
+        console.log("paper loses to scissor")
         return "lose";
     } else {
         return "tie"
     };
 }
 
-function game() {
 
-    let rounds = 0;
-    let win = 0;
-    let lose = 0;
-    let tie = 0;
-    while (rounds < 5) {
-        let computerChoice = getComputerChoice();
-        let playerChoice = prompt().toLowerCase();
-        let result = playRound(computerChoice, playerChoice);
+let win = 0;
+let lose = 0;
+let tie = 0;
 
-        if (result == "win") {
-            win++;
-        } else if (result == "lose") {
-            lose++
-        } else {
-            tie++
-        }
-        rounds++;
-
+let buttons = document.querySelectorAll('button');
+buttons.forEach(
+    button => {
+        button.addEventListener('click', (e) => {
+            let playerChoice = e.target.id;
+            let computerChoice = getComputerChoice();
+            console.log(playRound(playerChoice, computerChoice))
+        })
     }
-    console.log('game over')
-    if (win > lose) {
-        console.log("player wins");
-    } else if (lose > win) {
-        console.log("player loses")
-    } else {
-        console.log("it was a tie")
-    }
-    console.log(`wins:${win}, loses:${lose}, ties ${tie}`)
-}
-
-game();
+)
